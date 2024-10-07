@@ -18,10 +18,10 @@ public class TipoProducto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idtipousuario")
-	private int idtipousuario;
+	@Column(name="idtipoproducto")
+	private int idtipoproducto;
 	
-	@NotNull(message = "ingrese el usuario correspondiente")
-	@Column(name="tipousuario")
-	private String tipousuario;
+	@NotNull(message = "ingrese la descripcion del tipo de producto")
+	@Column(name="descripcionproducto")
+	private String descripcionproducto;
 }

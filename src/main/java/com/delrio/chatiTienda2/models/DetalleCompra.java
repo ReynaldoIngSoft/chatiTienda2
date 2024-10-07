@@ -2,9 +2,12 @@ package com.delrio.chatiTienda2.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -17,12 +20,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DetalleCompra {
 	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="iddetallecompra")
 	@Id
+	@Column(name="iddetallecompra")
 	private  int iddetallecompra;
-	
-	
 	
 	@NotNull(message="no dejar en blanco el codigo producto")
 	@Column(name="idproducto")
@@ -43,6 +43,14 @@ public class DetalleCompra {
 	@Min(1)
 	@Column(name="cantidad")
 	private int cantidad;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idproducto", insertable = false, updatable= false)
+	private Product objProducto;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idcompra", insertable = false, updatable = false)
+	private Compra objCompra;
 	
 	
 	

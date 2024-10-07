@@ -30,7 +30,7 @@ public class Proveedor {
 	@NotNull(message="el ruc tiene que tener minimo 11 digitos")
 	@Size(min = 11, max = 11 , message= "el ruc debe tener minimo 11 digitos")
 	@Column(name="rucproveedor")
-	private int rucproveedor;
+	private String rucproveedor;
 	
 	@NotNull(message= "la direcciomn no puede ser nula")
 	@Column(name="direccionproveedor")

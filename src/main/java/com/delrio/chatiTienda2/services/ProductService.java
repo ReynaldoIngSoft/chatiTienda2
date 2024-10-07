@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Service;
 
 import com.delrio.chatiTienda2.models.Product;
 import com.delrio.chatiTienda2.repositories.ProductRepository;
+import com.fasterxml.jackson.core.sym.Name;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProductService {
@@ -23,10 +27,17 @@ public class ProductService {
 		return productorepository.findById(id);
 	}
 	
-	public Product saveChatiProducto(Product chatiproducto) {
-		return productorepository.save(chatiproducto);
+	@Transactional
+	public void saveProduct(Product producto){
+		productorepository.saveProduct(producto.getDescripcionproducto(),
+									   producto.getStock(),
+									   producto.getPrecioventa(),
+									   producto.getPreciocompra(),
+									   producto.getIdtipoproducto(),
+									   producto.getIdproducto(),
+									   producto.getGenero().name());
 	}
-	
+		
 	public void deleteChatiProducto(int id) {
 		productorepository.deleteById(id);
 	}

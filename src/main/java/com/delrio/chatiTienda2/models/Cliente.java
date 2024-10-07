@@ -21,7 +21,7 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="tb_clientes")
+	@Column(name="idcliente")
 	private int idcliente;
 
 	@NotNull(message = "el dni no puede estrar vacio")
