@@ -16,6 +16,7 @@ public class ProductController {
 		@Autowired
 		private ProductService productoservicio;
 		
+   @PostMapping("/save)
 		public ResponseEntity<String> saveProduct(
 				@RequestParam String descripcionproducto,
 				@RequestParam int stock,
