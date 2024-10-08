@@ -36,7 +36,7 @@ public class Product implements Serializable {
 	private String descripcionproducto;
 	
 	@NotNull(message = "La cantidad no puede ser nula")
-	@Min(value = 0, message = "La cantidad debe ser al menos 1")
+	@Min(value = 1, message = "La cantidad debe ser al menos 1")
 	@Column(name = "stock")
     private int stock;
 	
@@ -59,9 +59,12 @@ public class Product implements Serializable {
     private int idproveedor;
 	
 	@NotNull(message ="El genero no puede ser nulo")
-	@Pattern(regexp = "M|F", message = "El genero debe ser 'M'o 'F'")
-	@Column(name = "genero", nullable = false)
-	private Genero genero;
+	@Column(name = "genero")
+	private int genero;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="genero", insertable = false, updatable = false)
+	private Genero objGenero;
 	
 	 @ManyToOne(fetch =FetchType.EAGER)
 	 @JoinColumn(name="idtipoproducto", insertable = false, updatable = false)
@@ -71,7 +74,5 @@ public class Product implements Serializable {
 	 @JoinColumn(name = "idproveedor", insertable = false, updatable = false)
 	 private Proveedor objProveedor;
 	 
-     public enum Genero{
-        M, F
-    }
+
 }

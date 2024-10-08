@@ -27,15 +27,16 @@ public class ProductService {
 		return productorepository.findById(id);
 	}
 	
+	
 	@Transactional
-	public void saveProduct(Product producto){
+	public void guardarProducto(Product producto){
 		productorepository.saveProduct(producto.getDescripcionproducto(),
 									   producto.getStock(),
 									   producto.getPrecioventa(),
 									   producto.getPreciocompra(),
 									   producto.getIdtipoproducto(),
-									   producto.getIdproducto(),
-									   producto.getGenero().name());
+									   producto.getIdproveedor(),
+									   producto.getGenero());
 	}
 		
 	public void deleteChatiProducto(int id) {

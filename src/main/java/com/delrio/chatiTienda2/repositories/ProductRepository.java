@@ -10,5 +10,5 @@ import com.delrio.chatiTienda2.models.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	@Procedure(procedureName = "saveProductos")
-	void saveProduct(String descripcionProducto, int stock, double precioventa, double preciocompra, int idtipoproducto, int idproveedor, String genero);
+	void saveProduct(String descripcionProducto, int stock, double precioventa, double preciocompra, int idtipoproducto, int idproveedor, int genero);
 }
