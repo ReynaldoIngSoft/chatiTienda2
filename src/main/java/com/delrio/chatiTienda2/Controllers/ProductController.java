@@ -1,7 +1,13 @@
 package com.delrio.chatiTienda2.Controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,39 +20,42 @@ import com.delrio.chatiTienda2.services.ProductService;
 @RestController
 @RequestMapping("/api/productos")
 public class ProductController {
-		
+	
 		@Autowired
 		private ProductService productoservicio;
 		
-		
+//OBTENER PRODUCTOS
+		@GetMapping("/productos")
+		public ResponseEntity<?> getProducts(){
+			try {
+				return ResponseEntity.status(HttpStatus.OK).body(productoservicio.getChatiProductos());
+			}catch(Exception e) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+			}
+		}
+
+//GUARDAR PRODUCTO	
 	    @PostMapping("/save")
 	    public ResponseEntity<String> saveProduct(@RequestBody Product producto) {
-	        // Guardar el producto
-	        productoservicio.guardarProducto(producto);
-	        
-	        return ResponseEntity.ok("Producto registrado con éxito");
+	    	
+	    	try {
+	    		productoservicio.guardarProducto(producto);
+	    		return ResponseEntity.status(HttpStatus.CREATED).body("Producto guardado con éxito");
+	    	}
+	    	catch(Exception e){
+	    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error Inesperado: " +e.getMessage());
+	    	}
 	    }
-	    
-		/*@PostMapping("/save")
-		public ResponseEntity<String> saveProduct(
-				@RequestParam String descripcionproducto,
-				@RequestParam int stock,
-				@RequestParam double precioventa,
-				@RequestParam double preciocompra,
-				@RequestParam int idtipoproducto,
-				@RequestParam int idproveedor,
-				@RequestParam String genero){
-			Product producto = new Product();
-			producto.setDescripcionproducto(descripcionproducto);
-			producto.setStock(stock);
-			producto.setPrecioventa(precioventa);
-			producto.setPreciocompra(preciocompra);
-			producto.setIdtipoproducto(idtipoproducto);
-			producto.setIdproveedor(idproveedor);
-			producto.setGenero(Product.Genero.valueOf(genero.toUpperCase()));;
-			
-			productoservicio.guardarProducto(producto);
-			
-			return ResponseEntity.ok("Producto registrado con éxito");
-		}*/
-}
+//BUSCAR PRODUCTO POR ID
+	    @GetMapping("/buscar/{idproducto}")
+	    public Product getProducto(@PathVariable("idproducto") Integer idproducto){
+	    	try {
+	    		Product producto1 = productoservicio.getChatiProductoById(idproducto).orElse(null);
+	    		return  producto1;
+	    		
+	    	}
+	    	catch(Exception e){
+	    		return null;
+	    	}
+	      }
+		}

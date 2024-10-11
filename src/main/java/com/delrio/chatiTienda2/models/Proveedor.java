@@ -38,6 +38,6 @@ public class Proveedor {
 	
 	@Size(min = 9, max =9 , message="el numero de telefono debe tener 9 digitos")
 	@Column(name="telefonoproveedor")
-	private int telefonoproveedor;
+	private String telefonoproveedor;
 
 }

@@ -3,7 +3,10 @@ package com.delrio.chatiTienda2.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Service;
 
@@ -27,19 +30,21 @@ public class ProductService {
 		return productorepository.findById(id);
 	}
 	
-	
 	@Transactional
 	public void guardarProducto(Product producto){
-		productorepository.saveProduct(producto.getDescripcionproducto(),
-									   producto.getStock(),
-									   producto.getPrecioventa(),
-									   producto.getPreciocompra(),
-									   producto.getIdtipoproducto(),
-									   producto.getIdproveedor(),
-									   producto.getGenero());
+		try {
+			productorepository.saveProduct(producto.getDescripcionproducto(),
+					   producto.getStock(),
+					   producto.getPrecioventa(),
+					   producto.getPreciocompra(),
+					   producto.getIdtipoproducto(),
+					   producto.getIdproveedor(),
+					   producto.getGenero());
+		}
+		catch(Exception e){
+			throw new RuntimeException("Error al guardar el producto", e);
+			
+		}
 	}
 		
-	public void deleteChatiProducto(int id) {
-		productorepository.deleteById(id);
-	}
 }

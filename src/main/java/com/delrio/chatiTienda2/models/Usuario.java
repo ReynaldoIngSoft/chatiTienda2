@@ -40,7 +40,7 @@ public class Usuario {
 	
 	@NotBlank(message="el estado del usuario no deberia estar en blanco ")
 	@Column(name="estadousuario")
-	private boolean estadousuario;
+	private int estadousuario;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idtipousuario", insertable = false, updatable = false)
