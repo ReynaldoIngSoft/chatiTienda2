@@ -29,7 +29,7 @@ public class clienteService {
 					  cliente.getDireccioncliente());
 		}
 		catch(Exception e){
-			throw new RuntimeException("Error al guardar el producto",e);
+			throw new RuntimeException("Error al guardar el producto" + e.getMessage());
 		}
 	
 	}
