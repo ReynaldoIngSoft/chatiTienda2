@@ -2,16 +2,12 @@ package com.delrio.chatiTienda2.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.delrio.chatiTienda2.repositories.ClienteRepository;
-import com.delrio.chatiTienda2.repositories.ProveedorRepository;
-
 import jakarta.transaction.Transactional;
-
 import com.delrio.chatiTienda2.models.Cliente;
-import com.delrio.chatiTienda2.models.Product;
+
 
 @Service
 public class clienteService {

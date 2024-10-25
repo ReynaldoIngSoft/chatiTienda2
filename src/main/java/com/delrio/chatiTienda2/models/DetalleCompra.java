@@ -36,10 +36,6 @@ public class DetalleCompra {
 	@Column(name="preciocompra")
 	private double preciocompra;
 	
-	@NotNull(message="debe ingresar el campo precio venta")
-	@Column(name="precioventa")
-	private double precioventa;
-	
 	@Min(1)
 	@Column(name="cantidad")
 	private int cantidad;
