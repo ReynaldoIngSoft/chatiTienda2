@@ -14,15 +14,12 @@ public class clienteService {
 	
 	@Autowired
 	private ClienteRepository clienterepositorio;
+	
 
-	@Transactional
-	public void guardarClientes(Cliente cliente) {
+	public void  guardarClientes(Cliente cliente) {
 		try {
-			clienterepositorio.saveClient(cliente.getDnicliente(),
-					  cliente.getNombrecliente(),
-					  cliente.getTelefonocliente(),
-					  cliente.getEmailcliente(),
-					  cliente.getDireccioncliente());
+			 clienterepositorio.saveClient(cliente.getDnicliente(), cliente.getNombrecliente(),cliente.getTelefonocliente(),cliente.getEmailcliente(), cliente.getDireccioncliente());
+			
 		}
 		catch(Exception e){
 			throw new RuntimeException("Error al guardar el producto" + e.getMessage());
